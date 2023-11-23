@@ -37,16 +37,12 @@ for ((i = 0; i < ${#ips[@]}; i++)); do
 cat <<EOF >> /etc/xray/serve.toml
 [[inbounds]]
 listen = "${ips[i]}"
-port = $socks_port
-protocol = "socks"
+port = "27761"
+protocol = "shadowsocks"
 tag = "$((i+1))"
 [inbounds.settings]
-auth = "password"
-udp = true
-ip = "${ips[i]}"
-[[inbounds.settings.accounts]]
-user = "$socks_user"
-pass = "$socks_pass"
+method = "aes-256-gcm"
+password = "71f75846-4fc1-eff8-1b0e-186ccc395992"
 [[routing.rules]]
 type = "field"
 inboundTag = "$((i+1))"
